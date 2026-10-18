@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file: .env                    # DEEPSEEK_API_KEY、LANGSMITH_* 从这里读，不打进镜像
+    environment:
+      OLLAMA_BASE_URL: http://host.docker.internal:11434   # 用宿主机上的 Ollama 做向量
+      # 联网搜索需要代理时取消注释（代理软件要打开“允许局域网连接”）：
+      # DDGS_PROXY: http://host.docker.internal:7897
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./data:/app/data              # 研究进度存在宿主机，容器删了也不丢

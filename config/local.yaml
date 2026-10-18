@@ -1,0 +1,28 @@
+# 本地配置：改模型/搜索参数只改这里，代码从 config/local.yaml 读取。
+# 运行目录应为项目根目录（langgraph-quickstart/），相对路径才对得上。
+
+model:
+  name: "openbmb/minicpm-v4.6:latest"
+  api_url: "http://localhost:11434/api/generate"
+  timeout: 60
+  fallback_name: ""
+
+search:
+  max_results: 3
+  max_retries: 1
+
+# ===== Day2 起：统一的大模型配置，代码通过 common/llm.py 的 get_llm() 读取 =====
+llm:
+  provider: "deepseek"   # deepseek | ollama，切换模型只改这一行
+  temperature: 0
+  deepseek:
+    model: "deepseek-chat"   # 需要推理过程可换 deepseek-reasoner（不支持部分参数，Day3 再说）
+    # API Key 不写在这里！放在项目根目录的 .env 里：DEEPSEEK_API_KEY=sk-xxx
+  ollama:
+    model: "openbmb/minicpm-v4.6:latest"
+    base_url: "http://localhost:11434"
+
+# ===== Day8 起：文字向量化（Embedding）模型，DeepSeek 没有这个功能，用本地 Ollama =====
+embedding:
+  model: "bge-m3"   # 中文效果好的向量模型，下载：ollama pull bge-m3
+  base_url: "http://localhost:11434"

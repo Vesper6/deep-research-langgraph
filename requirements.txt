@@ -1,0 +1,14 @@
+langgraph>=1.2
+langchain-core>=1.6
+langchain-deepseek>=1.1
+langchain-ollama>=1.1
+python-dotenv>=1.2
+pyyaml>=6.0
+requests>=2.32
+ddgs>=9.0
+langgraph-checkpoint-sqlite>=3.0
+langchain-text-splitters>=1.1
+numpy>=2.0
+fastapi
+uvicorn
+pytest
